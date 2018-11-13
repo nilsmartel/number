@@ -57,11 +57,26 @@ impl AddNumber for i64 {
         match number {
             Number::Undefined => Number::Undefined,
             Number::Integer(i) => Number::new_integer(self + i),
-            Number::Rational(r) => {
-                Number::new_rational(self * r.denom().clone() + r.numer(), r.denom().clone())
+            Number::Rational(q) => {
+                Number::new_rational(self * q.denom().clone() + q.numer(), q.denom().clone())
             }
             Number::Real(r) => Number::new_real(r * self as f64),
             Number::Complex(c) => Number::new_complex((self as f64) * c.re, c.im),
+        }
+    }
+}
+
+impl AddNumber for Rational64 {
+    fn add_number(self, number: Number) -> Number {
+        match number {
+            Number::Undefined => Number::Undefined,
+            Number::Integer(i) => i.add_number(Number::Rational(self)),
+            Number::Rational(q) => {
+                let result = self + q;
+                Number::new_rational(result.numer().clone(), result.denom().clone())
+            }
+            Number::Real(r) => Number::new_real(r + rational_to_float(self)),
+            Number::Complex(c) => Number::Co,
         }
     }
 }
