@@ -1,3 +1,6 @@
+use num_complex::Complex;
+use num_rational::Rational64;
+
 #[derive(Copy, Clone, Debug)]
 pub enum Number {
     Undefined,
