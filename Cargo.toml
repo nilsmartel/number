@@ -1,0 +1,9 @@
+[package]
+name = "number"
+version = "0.1.0"
+authors = ["sombrastudios <nilsmartel@yahoo.de>"]
+edition = "2018"
+
+[dependencies]
+num-complex = "*"
+num-rational = "*"
