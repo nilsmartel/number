@@ -41,6 +41,18 @@ pub trait AddNumber {
     fn add_number(self, number: Number) -> Number;
 }
 
+impl AddNumber for Number {
+    fn add_number(self, number: Number) -> Number {
+        match self {
+            Number::Undefined => Number::Undefined,
+            Number::Integer(n) => n.add_number(number),
+            Number::Rational(q) => q.add_number(number),
+            Number::Real(r) => r.add_number(number),
+            Number::Complex(c) => c.add_number(number),
+        }
+    }
+}
+
 impl AddNumber for i64 {
     fn add_number(self, number: Number) -> Number {
         match number {
